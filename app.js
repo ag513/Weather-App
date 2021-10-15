@@ -1,19 +1,17 @@
-const request = require('postman-request');
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast')
-
-
-forecast(44.1545, 2.1402895, (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
-})
+const chalk = require('chalk')
 
 geocode('Manchester', (error, data) => {
-    console.log('error: ', error);
-    console.log('data: ', data);
-})
-
-geocode('Manchester USA', (error, data) => {
-    console.log('error: ', error);
-    console.log('data: ', data);
+    if (error) {
+        return error;
+    }
+    forecast(data.lat, data.long, (error, forecastData) => {
+        if (error) {
+            return error;
+        }
+        console.log('Error', error)
+        console.log('location: ', data.name)
+        console.log(chalk.greenBright(forecastData))
+    })
 })
