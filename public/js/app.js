@@ -29,16 +29,19 @@ let options = '';
 
 search.addEventListener('input', () => {
     const searchKey = search.value
-    fetch('/locations?locationName=' + searchKey).then((res) => {
-        res.json().then((data) => {
-            if (data.error) {
-                return
-            }
-            data.forEach((location) => {
-                options += '<option value="' + location + '" />';
+    console.log(searchKey.length)
+    if (searchKey.length >= 3) {
+        fetch('/locations?locationName=' + searchKey).then((res) => {
+            res.json().then((data) => {
+                if (data.error) {
+                    return
+                }
+                data.forEach((location) => {
+                    options += '<option value="' + location + '" />';
 
-            });
-            document.getElementById('locationsList').innerHTML = options;
+                });
+                document.getElementById('locationsList').innerHTML = options;
+            })
         })
-    })
+    }
 })
