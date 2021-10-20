@@ -13,12 +13,13 @@
         {{>header}}
 
         <form action="">
-            <input placeholder="Enter location" type="text">
+            <input list="locationsList" placeholder="Enter location" type="text">
+            <datalist id="locationsList">
+            </datalist>
             <button>Search</button>
-        </form>
-        <img src="" id="weather-icon" alt="">
-        <p id="message-1"></p>
-        <p id="message-2"></p>
+            <img src="" id="weather-icon" alt="">
+            <p id="message-1"></p>
+            <p id="message-2"></p>
 
     </div>
     {{>footer}}

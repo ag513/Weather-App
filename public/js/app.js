@@ -24,3 +24,21 @@ weatherFrom.addEventListener('submit', (event) => {
         })
     });
 })
+
+let options = '';
+
+search.addEventListener('input', () => {
+    const searchKey = search.value
+    fetch('/locations?locationName=' + searchKey).then((res) => {
+        res.json().then((data) => {
+            if (data.error) {
+                return
+            }
+            data.forEach((location) => {
+                options += '<option value="' + location + '" />';
+
+            });
+            document.getElementById('locationsList').innerHTML = options;
+        })
+    })
+})

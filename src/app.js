@@ -1,5 +1,6 @@
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
+const getLocations = require('./utils/getLocations')
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
@@ -50,6 +51,20 @@ app.get('/help/*', (req, res) => {
     })
 })
 
+app.get('/locations', (req, res) => {
+    if (!req.query.locationName) {
+        return res.send({
+            error: 'Please enter a location'
+        })
+    }
+    getLocations(req.query.locationName, (error, locationsList = []) => {
+        if (error) {
+            return res.send({ error })
+        }
+        res.send(locationsList)
+    })
+
+})
 
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
