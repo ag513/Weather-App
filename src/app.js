@@ -78,15 +78,30 @@ app.get('/weather', (req, res) => {
             return res.send({ error })
         }
 
-        forecast(latitude, longitude, (error, forecastData, forecastIcon) => {
+        forecast(latitude, longitude, (error, forecastData, forecastIcon, time) => {
             if (error) {
                 return res.send({ error })
+            }
+            let partsOfDay = ''
+            const parsedTime = time.split(" ")[1].split(":")[0];
+
+            if (parsedTime >= 5 && parsedTime <= 8) {
+                partsOfDay = 'early-morning'
+            } else if (parsedTime > 8 && parsedTime < 12) {
+                partsOfDay = 'morning'
+            } else if (parsedTime >= 12 && parsedTime <= 17) {
+                partsOfDay = 'afternoon'
+            } else if (parsedTime > 17 && parsedTime <= 20) {
+                partsOfDay = 'evening'
+            } else {
+                partsOfDay = 'night'
             }
 
             res.send({
                 forecast: forecastData,
                 location,
                 forecastIcon,
+                partsOfDay,
                 address: req.query.address,
                 test: 'testing'
             });
