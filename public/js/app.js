@@ -11,7 +11,7 @@ weatherFrom.addEventListener('submit', (event) => {
     message2.textContent = ''
     weatherIcon.style.display = 'none'
 
-    fetch('http://localhost:3001/weather?address=' + location).then((res) => {
+    fetch('/weather?address=' + location).then((res) => {
         res.json().then((data) => {
             if (data.error) {
                 message1.textContent = data.error
