@@ -10,7 +10,7 @@ weatherFrom.addEventListener('submit', (event) => {
     message1.textContent = 'loading...'
     message2.textContent = ''
     weatherIcon.style.display = 'none'
-
+    document.body.style.backgroundImage = ``
     fetch('/weather?address=' + location).then((res) => {
         res.json().then((data) => {
             if (data.error) {
@@ -20,6 +20,8 @@ weatherFrom.addEventListener('submit', (event) => {
                 message2.textContent = data.forecast
                 weatherIcon.setAttribute('src', data.forecastIcon)
                 weatherIcon.style.display = 'block'
+
+                document.body.style.backgroundImage = `url('/img/${data.partsOfDay}.jpg')`
             }
         })
     });
