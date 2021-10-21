@@ -22,17 +22,23 @@ hbs.registerPartials(partialsPath);
 //setup directory for static assets
 app.use(express.static(publicDirPath));
 
+
+//set headers
+// app.use((req, res) => {
+//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001')
+// })
+
 app.get('', (req, res) => {
     res.render('index', {
         title: 'weather page',
-        name: 'abhi'
+        name: 'Abhinav'
     });
 })
 
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'about page',
-        name: 'abhinav'
+        name: 'Abhinav'
     });
 })
 
@@ -40,14 +46,14 @@ app.get('/about', (req, res) => {
 app.get('/help', (req, res) => {
     res.render('help', {
         title: 'this is a help page',
-        name: 'abhinav'
+        name: 'Abhinav'
     })
 })
 
 app.get('/help/*', (req, res) => {
     res.render('404', {
         errorMessage: 'Cannot found help',
-        name: 'abhi'
+        name: 'Abhinav'
     })
 })
 
@@ -96,14 +102,14 @@ app.get('/weather', (req, res) => {
             } else {
                 partsOfDay = 'night'
             }
-
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001')
             res.send({
                 forecast: forecastData,
                 location,
                 forecastIcon,
                 partsOfDay,
                 address: req.query.address,
-                test: 'testing'
+                test: 'test'
             });
         })
     })
@@ -114,7 +120,7 @@ app.get('*', (req, res) => {
     // res.send('cannot find the page')
     res.render('404', {
         errorMessage: 'This is 404  page',
-        name: 'abhi'
+        name: 'Abhinav'
     })
 })
 
