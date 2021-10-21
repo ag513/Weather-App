@@ -102,7 +102,7 @@ app.get('/weather', (req, res) => {
             } else {
                 partsOfDay = 'night'
             }
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001')
+            res.header("Access-Control-Allow-Origin", req.headers.origin)
             res.send({
                 forecast: forecastData,
                 location,
